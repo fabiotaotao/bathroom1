@@ -20,7 +20,7 @@ main(int argc,char* argv[])
 	
 	ntot=nreg+ndir+nblk+nchr+nfifo+nslink+nsock;
 	if(ntot==0)
-		ntot=1;	/*avoid divide by 0;print 0 for allcounts*/
+		ntot=1;	/*avoid divide by 0;print 0 for all counts*/
 	printf("regular files  = %7ld, %5.2f %%\n",nreg,
 		nreg*100.0/ntot);
 	printf("directories    = %7ld, %5.2f %%\n",ndir,
@@ -56,6 +56,9 @@ myftw(char * pathname, Myfunc *func)
 {
 	int len;
 	fullpath = path_alloc(&len);
+
+	strncpy(fullpath,pathname,len);
+	fullpath[len-1]=0;
 
 	return (dopath(func));
 }
